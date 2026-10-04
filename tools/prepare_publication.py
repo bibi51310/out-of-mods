@@ -45,6 +45,20 @@ PERSONAL = re.compile("|".join(re.escape(b) if "Users" in b or "AppData" in b el
 MAX_BYTES = 1_500_000
 
 
+TEXT_EXT = (".txt", ".md", ".py", ".pyw", ".lua", ".json", ".yml", ".yaml", ".cmd", ".ini", ".terms")
+
+
+def copy_file(s, d):
+    """Copie un fichier ; les fichiers texte sont normalises en fins de ligne LF (depot public coherent, pas de bruit CRLF)."""
+    os.makedirs(os.path.dirname(d), exist_ok=True)
+    if s.lower().endswith(TEXT_EXT) or os.path.basename(s) in ("LICENSE",):
+        data = open(s, "rb").read().replace(b"\r\n", b"\n")
+        with open(d, "wb") as f:
+            f.write(data)
+    else:
+        shutil.copy2(s, d)
+
+
 def copy_item(src, dst):
     if os.path.isdir(src):
         for base, dirs, files in os.walk(src):
@@ -53,17 +67,22 @@ def copy_item(src, dst):
                 if f.endswith(".pyc") or f.endswith(".log"):
                     continue
                 s = os.path.join(base, f)
-                d = os.path.join(dst, os.path.relpath(s, src))
-                os.makedirs(os.path.dirname(d), exist_ok=True)
-                shutil.copy2(s, d)
+                copy_file(s, os.path.join(dst, os.path.relpath(s, src)))
     else:
-        os.makedirs(os.path.dirname(dst), exist_ok=True)
-        shutil.copy2(src, dst)
+        copy_file(src, dst)
 
 
 def main():
-    shutil.rmtree(OUT, ignore_errors=True)
-    os.makedirs(OUT)
+    # Nettoie le contenu SAUF .git (le dossier peut etre un clone du depot public : son historique ne doit jamais etre touche)
+    os.makedirs(OUT, exist_ok=True)
+    for name in os.listdir(OUT):
+        if name == ".git":
+            continue
+        path = os.path.join(OUT, name)
+        if os.path.isdir(path):
+            shutil.rmtree(path, onerror=lambda f, p, e: (os.chmod(p, 0o700), f(p)))
+        else:
+            os.remove(path)
     missing = []
     for src, dst in INCLUDE:
         s = os.path.join(ROOT, src.replace("/", os.sep))
@@ -78,6 +97,8 @@ def main():
             for a, b in pairs:
                 text = text.replace(a, b)
             open(p, "w", encoding="utf-8", newline="\n").write(text)
+    with open(os.path.join(OUT, ".gitattributes"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("* text=auto eol=lf\n*.zip binary\n*.exe binary\n")
     with open(os.path.join(OUT, ".gitignore"), "w", encoding="utf-8", newline="\n") as f:
         f.write("# artefacts de construction\ndist/\nbuild_tmp/\n__pycache__/\n*.pyc\n*.log\n")
     problems = []
