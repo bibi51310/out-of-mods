@@ -203,7 +203,7 @@ try:
             check("telechargement refuse : " + bad, False)
         except core.PackageError:
             check("telechargement refuse : " + bad, True)
-    check("source UE4SS : hash fige", len(core.UE4SS_SOURCES[core.DEFAULT_SOURCE]["sha256"]) == 64 and core.UE4SS_SOURCES[core.DEFAULT_SOURCE]["url"].startswith("https://github.com/UE4SS-RE/"))
+    check("source UE4SS : hash fige", len(core.UE4SS_SOURCES[core.DEFAULT_SOURCE]["sha256"]) == 64 and core.UE4SS_SOURCES[core.DEFAULT_SOURCE]["url"].startswith("https://github.com/bibi51310/out-of-mods/releases/download/"))
 finally:
     shutil.rmtree(TMP, ignore_errors=True)
 

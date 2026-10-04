@@ -379,7 +379,7 @@ def do_set_enabled(plan, log=lambda s: None):
 UE4SS_SOURCES = {
     # Source proposee par defaut : build experimental de UE4SS-RE (MIT) VALIDE avec Out of Ore le 2026-10-04 (chargement des mods, hooks de terrassement).
     "e3ba1016": {"label": tr("UE4SS 3.0.1 - build e3ba1016 (UE4SS-RE, licence MIT, valide avec Out of Ore)"),
-                 "url": "https://github.com/UE4SS-RE/RE-UE4SS/releases/download/experimental-latest/UE4SS_v3.0.1-1152-ge3ba1016.zip",
+                 "url": "https://github.com/bibi51310/out-of-mods/releases/download/ue4ss-e3ba1016/UE4SS_v3.0.1-1152-ge3ba1016.zip",  # copie miroir (la release d'origine est mobile)
                  "sha256": "af8ea9d8975e8eff7967423f43b8b50875e66a29a0f434cffce6e0867ea17252", "size": 8730191,
                  "page": "https://github.com/UE4SS-RE/RE-UE4SS/releases/tag/experimental-latest"},
 }

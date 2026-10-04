@@ -87,11 +87,14 @@ try:
             check("hote refuse : " + bad, False)
         except core.PackageError:
             check("hote refuse : " + bad, True)
+    saved_url, core.UPDATE_MANIFEST_URL = core.UPDATE_MANIFEST_URL, ""
+    os.environ.pop("OOLAUNCHER_UPDATE_URL", None)
     try:
         core.fetch_manifest("")
         check("source non configuree : refuse proprement", False)
     except core.PackageError:
         check("source non configuree : refuse proprement", True)
+    core.UPDATE_MANIFEST_URL = saved_url
 
     # ---- manifeste (l'hote de test est autorise EXPLICITEMENT)
     os.environ[core.ALLOW_ENV] = "127.0.0.1"
