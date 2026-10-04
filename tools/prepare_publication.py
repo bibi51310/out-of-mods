@@ -19,7 +19,7 @@ OUT = os.path.join(ROOT, "publish", "repo")
 INCLUDE = [
     ("LICENSE", "LICENSE"), ("THIRD_PARTY_NOTICES.md", "THIRD_PARTY_NOTICES.md"),
     ("publish/README.md", "README.md"), ("publish/CHANGELOG.md", "CHANGELOG.md"),
-    ("publish/CONTRIBUTING.md", "CONTRIBUTING.md"), ("publish/github", ".github"),
+    ("publish/CONTRIBUTING.md", "CONTRIBUTING.md"), ("publish/MODDING.md", "MODDING.md"), ("publish/github", ".github"),
     ("mods/FlatGround2", "mods/FlatGround2"),
     ("api/OutOfOreAPI.lua", "api/OutOfOreAPI.lua"), ("api/README.md", "api/README.md"),
     ("launcher", "launcher"),

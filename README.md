@@ -15,7 +15,7 @@
 |---|---|
 | **FlatGround 2** (mod) | Un **plancher de creusage** : aucun terrassement sous la hauteur Z choisie → des terrains parfaitement plats. Panneau en jeu, hauteurs nommées, **lame automatique de bulldozer** qui tient le plancher. |
 | **Out of Mods** (le launcheur, programme Windows) | Détecte le jeu, installe / désinstalle / active les mods et, **si vous le demandez**, installe UE4SS. **Rien n'est fait sans votre confirmation.** |
-| **OutOfOreAPI** (pour les moddeurs) | Bibliothèque Lua : lecture du monde, des engins, de l'économie, fenêtres en jeu… voir `api/README.md`. |
+| **OutOfOreAPI** (pour les moddeurs) | Bibliothèque Lua : lecture du monde, des engins, de l'économie, fenêtres en jeu… voir `api/README.md`. **Publier votre propre mod : [MODDING.md](MODDING.md).** |
 
 ### Fonctions de FlatGround 2
 
@@ -88,7 +88,7 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
 |---|---|
 | **FlatGround 2** (mod) | A **digging floor**: nothing can be dug below your chosen Z height → perfectly flat ground. In-game panel, named heights and an **automatic bulldozer blade** that holds the floor. |
 | **Out of Mods** (the launcher, Windows app) | Detects the game, installs / uninstalls / enables mods and, **only if you ask**, installs UE4SS. **Nothing happens without your confirmation.** |
-| **OutOfOreAPI** (for modders) | Lua library: world, vehicles, economy, in-game windows… see `api/README.md`. |
+| **OutOfOreAPI** (for modders) | Lua library: world, vehicles, economy, in-game windows… see `api/README.md`. **Publishing your own mod: [MODDING.md](MODDING.md).** |
 
 ### FlatGround 2 features
 
