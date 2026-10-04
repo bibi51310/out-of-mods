@@ -1,0 +1,42 @@
+name: Bug / Bug report
+description: Quelque chose ne fonctionne pas / Something does not work
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci / Thanks ! Plus le rapport est précis, plus vite on corrige. **Ne collez jamais de données du jeu.**
+  - type: dropdown
+    id: component
+    attributes:
+      label: Composant / Component
+      options: ["Out of Mods (launcher)", "FlatGround 2 (plancher / floor)", "FlatGround 2 (lame auto / auto blade)", "FlatGround 2 (panneau / panel)", "OutOfOreAPI", "Autre / Other"]
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: "Version du jeu (affichée dans le menu, ex. v0.36.5550), de Out of Mods / du mod, build Steam si connu"
+      placeholder: "jeu v0.36.5550 · Out of Mods 0.1.0 · FlatGround 2 0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: Que s'est-il passé ? / What happened?
+      description: "Ce que vous faisiez, ce que vous attendiez, ce qui s'est produit (engin utilisé, branche du jeu…)"
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Rapport de diagnostic / Diagnostic report
+      description: "Bouton « Copier le rapport de diagnostic » de Out of Mods. Relisez-le : il contient des chemins locaux."
+      render: text
+  - type: textarea
+    id: logs
+    attributes:
+      label: Journaux / Logs
+      description: "Extrait de UE4SS.log ; pour la lame : %APPDATA%\OutOfOreFlat2\auto_trace.txt"
+      render: text

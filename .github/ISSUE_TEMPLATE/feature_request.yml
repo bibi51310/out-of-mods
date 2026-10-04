@@ -1,0 +1,11 @@
+name: Idée / suggestion / Idea
+description: Proposer une amélioration / Suggest an improvement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Votre idée / Your idea
+      description: "Que voudriez-vous pouvoir faire ? Pourquoi ? / What would you like to do, and why?"
+    validations:
+      required: true

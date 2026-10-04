@@ -1,0 +1,47 @@
+{
+  "id": "FlatGround2",
+  "name": "FlatGround 2",
+  "version": "0.1.0",
+  "description": "Plancher de creusage (aucun terrassement sous une hauteur Z choisie), panneau en jeu (F7), hauteurs nommees et lame automatique de bulldozer (AutoLevel natif).",
+  "description_en": "Digging floor (no digging below a chosen Z height), in-game panel (F7), named heights and automatic bulldozer blade (native AutoLevel).",
+  "author": "Out of Mods",
+  "license": "MIT",
+  "entry": "Scripts/main.lua",
+  "ue4ss": {
+    "minVersion": "3.0.1"
+  },
+  "game": {
+    "name": "Out of Ore",
+    "steamAppId": 2009350,
+    "testedBuildId": "25627989",
+    "testedGameVersion": "0.36.5550",
+    "branch": "beta"
+  },
+  "features": {
+    "floor": {
+      "requires": []
+    },
+    "autoBlade": {
+      "requires": [
+        "AutoLevelComponent_C (module AutoLevel monte sur le bulldozer, branche beta)"
+      ]
+    }
+  },
+  "controls": {
+    "panel": "F7 (ouvrir / souris interface <-> jeu)",
+    "close": "F8"
+  },
+  "console": [
+    "flat2_lock",
+    "flat2_set <z>",
+    "flat2_adj <delta>",
+    "flat2_off",
+    "flat2_status",
+    "flat2_scale <0.3-1.5>",
+    "flat2_panel_reset"
+  ],
+  "dataDirs": [
+    "%APPDATA%/OutOfOreFlat2",
+    "%APPDATA%/OutOfOreFlat"
+  ]
+}
