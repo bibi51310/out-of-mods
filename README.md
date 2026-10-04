@@ -52,6 +52,17 @@ Le bouton **« Mises à jour... »** du launcheur cherche une nouvelle version d
 * Vos fichiers existants sont **sauvegardés** (`OutOfMods_backups`) ; vos réglages UE4SS et vos mods sont conservés ; la désinstallation ne retire que ce que le launcheur a installé et **restaure** ce qu'il avait remplacé. Vos données (hauteurs, réglages) ne sont jamais touchées.
 * Votre antivirus peut signaler `dwmapi.dll` : c'est le chargeur d'UE4SS (faux positif connu).
 
+#### Vérifier votre téléchargement et faux positifs possibles (v0.1.0)
+
+Empreintes SHA-256 (PowerShell : `Get-FileHash <fichier>`) :
+
+| Fichier | SHA-256 |
+|---|---|
+| `OutOfMods-0.1.0-win64.zip` | `c67ee13ce59a2e2da72cba4d6d1fb5451b00318b0f5279309fcfa2166c634df0` |
+| `OutOfMods.exe` (dans le zip) | `8db08a43964fbb62deb438f1f0af44d12aa7fc1398fb38ac58e037b2a5eea48b` |
+
+Le launcheur est écrit en Python et empaqueté avec PyInstaller, **sans signature de code** pour l'instant. Ce type d'exécutable est parfois signalé à tort par des antivirus (détection par comportement : il décompresse du code en mémoire). Analyse VirusTotal du 2026-10-04 : `OutOfMods.exe` **3 moteurs sur 71** (Arctic Wolf, SecureAge, Skyhigh), aucun des principaux antivirus (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). Le code est entièrement ouvert dans ce dépôt, vous pouvez le lire, lancer les tests et reconstruire l'exe vous-même (`python tools/build_launcher.py`). En cas de doute, comparez l'empreinte ci-dessus ; si votre antivirus bloque le fichier, vous pouvez le signaler comme faux positif à son éditeur.
+
 ### UE4SS : version recommandée
 
 Le launcheur propose le build **`3.0.1 — e3ba1016`** d'[UE4SS-RE](https://github.com/UE4SS-RE/RE-UE4SS) (licence MIT), **validé avec Out of Ore**. ⚠ La release « stable » v3.0.1 charge les mods mais **fait échouer les hooks de terrassement** : à éviter. Les réglages recommandés (UE 4.27, console graphique désactivée) sont appliqués à un fichier de réglages *nouvellement créé* uniquement.
@@ -113,6 +124,17 @@ The launcher's **"Updates..."** button looks for a new version of the launcher a
 * No program is installed other than `dwmapi.dll` and `UE4SS.dll` (UE4SS itself); mod packages contain text only (Lua, JSON…).
 * Existing files are **backed up** (`OutOfMods_backups`); your UE4SS settings and mods are kept; uninstalling removes only what the launcher installed and **restores** what it replaced. Your data (heights, settings) is never touched.
 * Your antivirus may flag `dwmapi.dll`: that is the UE4SS loader (known false positive).
+
+#### Verifying your download & possible false positives (v0.1.0)
+
+SHA-256 fingerprints (PowerShell: `Get-FileHash <file>`):
+
+| File | SHA-256 |
+|---|---|
+| `OutOfMods-0.1.0-win64.zip` | `c67ee13ce59a2e2da72cba4d6d1fb5451b00318b0f5279309fcfa2166c634df0` |
+| `OutOfMods.exe` (inside the zip) | `8db08a43964fbb62deb438f1f0af44d12aa7fc1398fb38ac58e037b2a5eea48b` |
+
+The launcher is written in Python and packaged with PyInstaller, **not code-signed** for now. This kind of executable is sometimes wrongly flagged by antivirus products (behavioural detection: it unpacks code in memory). VirusTotal scan of 2026-10-04: `OutOfMods.exe` **3 engines out of 71** (Arctic Wolf, SecureAge, Skyhigh), none of the major antivirus products (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). The code is fully open in this repository: you can read it, run the tests and rebuild the exe yourself (`python tools/build_launcher.py`). If in doubt, compare the fingerprint above; if your antivirus blocks the file, you can report it to its vendor as a false positive.
 
 ### UE4SS: recommended version
 
