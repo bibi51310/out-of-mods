@@ -95,6 +95,7 @@ Aujourd'hui, la vérification de mises à jour du launcheur ne lit que **son pro
 - Il **n'analyse pas** le code Lua de votre mod : un mod Lua tourne dans le jeu, le joueur vous fait confiance (d'où l'intérêt du code ouvert).
 - Il n'y a **pas de catalogue** de mods dans le launcheur.
 - Projet communautaire, **sans lien avec les développeurs ni l'éditeur d'Out of Ore**.
+- Le launcheur sur Nexus Mods : https://www.nexusmods.com/outofore/mods/6 (exemple de mod publié : https://www.nexusmods.com/outofore/mods/7).
 
 ---
 
@@ -189,3 +190,4 @@ Today the launcher's update check only reads **its own** manifest: a third-party
 - It does **not audit** your Lua code: a Lua mod runs inside the game, players trust you (hence the value of open source).
 - There is **no mod catalogue** in the launcher.
 - Community project, **not affiliated with the developers or publisher of Out of Ore**.
+- The launcher on Nexus Mods: https://www.nexusmods.com/outofore/mods/6 (example of a published mod: https://www.nexusmods.com/outofore/mods/7).
