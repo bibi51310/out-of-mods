@@ -2,7 +2,7 @@
 
 🇫🇷 [Français](#français) · 🇬🇧 [English](#english)
 
-**Nexus Mods :** [Out of Mods (launcher)](https://www.nexusmods.com/outofore/mods/6) · [FlatGround 2 (mod)](https://www.nexusmods.com/outofore/mods/7) — ou / or [GitHub Releases](https://github.com/bibi51310/out-of-mods/releases)
+**Nexus Mods :** [Out of Mods (launcher)](https://www.nexusmods.com/outofore/mods/6) · [FlatGround 2 (mod)](https://www.nexusmods.com/outofore/mods/7) — ou / or [GitHub Releases](https://github.com/bibi51310/out-of-mods/releases) · **Discord :** https://discord.gg/CkP5c8cpz4
 
 > **Statut / Status** : version 0.2.0 (FlatGround 2) / 0.1.1 (launcheur) (préversion / preview). Testé sur / tested on **Out of Ore 0.36.5550, build Steam 25627989, branche bêta**.
 > Licence / License : **MIT** — © 2026 Out of Mods (voir / see `LICENSE`, `THIRD_PARTY_NOTICES.md`).
@@ -78,7 +78,7 @@ Le launcheur propose le build **`3.0.1 — e3ba1016`** d'[UE4SS-RE](https://gith
 ### Signaler un problème
 
 Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheur et leur version, ce que vous faisiez, et joignez `UE4SS.log` (dans `…/Win64/ue4ss/`) et, pour la lame, `%APPDATA%\OutOfOreFlat2\auto_trace.txt`.
-*(Adresse du dépôt / des tickets : à définir.)*
+**Tickets :** [GitHub Issues](https://github.com/bibi51310/out-of-mods/issues) · **Discord :** https://discord.gg/CkP5c8cpz4 (salons #support, #bugs, #suggestions).
 
 ### Limites connues
 
@@ -157,7 +157,7 @@ The launcher offers **`3.0.1 — e3ba1016`** from [UE4SS-RE](https://github.com/
 ### Reporting a problem
 
 Please include: game version (shown in the menu, e.g. `v0.36.5550`), mod / launcher and their version, what you were doing, and attach `UE4SS.log` (in `…/Win64/ue4ss/`) and, for the blade, `%APPDATA%\OutOfOreFlat2\auto_trace.txt`.
-*(Repository / issue tracker address: to be defined.)*
+**Issues:** [GitHub Issues](https://github.com/bibi51310/out-of-mods/issues) · **Discord:** https://discord.gg/CkP5c8cpz4 (#support, #bugs, #suggestions channels).
 
 ### Known limitations
 
