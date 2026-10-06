@@ -4,7 +4,7 @@
 
 **Nexus Mods :** [Out of Mods (launcher)](https://www.nexusmods.com/outofore/mods/6) · [FlatGround 2 (mod)](https://www.nexusmods.com/outofore/mods/7) — ou / or [GitHub Releases](https://github.com/bibi51310/out-of-mods/releases)
 
-> **Statut / Status** : version 0.1.0 (préversion / preview). Testé sur / tested on **Out of Ore 0.36.5550, build Steam 25627989, branche bêta**.
+> **Statut / Status** : version 0.2.0 (FlatGround 2) / 0.1.1 (launcheur) (préversion / preview). Testé sur / tested on **Out of Ore 0.36.5550, build Steam 25627989, branche bêta**.
 > Licence / License : **MIT** — © 2026 Out of Mods (voir / see `LICENSE`, `THIRD_PARTY_NOTICES.md`).
 
 ---
@@ -54,16 +54,16 @@ Le bouton **« Mises à jour... »** du launcheur cherche une nouvelle version d
 * Vos fichiers existants sont **sauvegardés** (`OutOfMods_backups`) ; vos réglages UE4SS et vos mods sont conservés ; la désinstallation ne retire que ce que le launcheur a installé et **restaure** ce qu'il avait remplacé. Vos données (hauteurs, réglages) ne sont jamais touchées.
 * Votre antivirus peut signaler `dwmapi.dll` : c'est le chargeur d'UE4SS (faux positif connu).
 
-#### Vérifier votre téléchargement et faux positifs possibles (v0.1.0)
+#### Vérifier votre téléchargement et faux positifs possibles (v0.1.1)
 
 Empreintes SHA-256 (PowerShell : `Get-FileHash <fichier>`) :
 
 | Fichier | SHA-256 |
 |---|---|
-| `OutOfMods-0.1.0-win64.zip` | `c67ee13ce59a2e2da72cba4d6d1fb5451b00318b0f5279309fcfa2166c634df0` |
-| `OutOfMods.exe` (dans le zip) | `8db08a43964fbb62deb438f1f0af44d12aa7fc1398fb38ac58e037b2a5eea48b` |
+| `OutOfMods-0.1.1-win64.zip` | `94ffc020f402d84b9dbea5c7148d19378d2fb2e2b20667cf09b8f62b31ce999e` |
+| `OutOfMods.exe` (dans le zip) | `f4bf2c1516d024d3cc3d63b9de67140338b2cd45cf82dd01edb9a568b28c956c` |
 
-Le launcheur est écrit en Python et empaqueté avec PyInstaller, **sans signature de code** pour l'instant. Ce type d'exécutable est parfois signalé à tort par des antivirus (détection par comportement : il décompresse du code en mémoire). Analyse VirusTotal du 2026-10-04 : `OutOfMods.exe` **3 moteurs sur 71** (Arctic Wolf, SecureAge, Skyhigh), aucun des principaux antivirus (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). Le zip complet : **1 moteur sur 67** (Zillya, `Trojan.Blank.Script.2228`, détection générique de script Python empaqueté). Le code est entièrement ouvert dans ce dépôt, vous pouvez le lire, lancer les tests et reconstruire l'exe vous-même (`python tools/build_launcher.py`). En cas de doute, comparez l'empreinte ci-dessus ; si votre antivirus bloque le fichier, vous pouvez le signaler comme faux positif à son éditeur.
+Le launcheur est écrit en Python et empaqueté avec PyInstaller, **sans signature de code** pour l'instant. Ce type d'exécutable est parfois signalé à tort par des antivirus (détection par comportement : il décompresse du code en mémoire). Analyse VirusTotal de la 0.1.0 (2026-10-04, la 0.1.1 n'a pas encore été analysée) : `OutOfMods.exe` **3 moteurs sur 71** (Arctic Wolf, SecureAge, Skyhigh), aucun des principaux antivirus (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). Le zip complet : **1 moteur sur 67** (Zillya, `Trojan.Blank.Script.2228`, détection générique de script Python empaqueté). Le code est entièrement ouvert dans ce dépôt, vous pouvez le lire, lancer les tests et reconstruire l'exe vous-même (`python tools/build_launcher.py`). En cas de doute, comparez l'empreinte ci-dessus ; si votre antivirus bloque le fichier, vous pouvez le signaler comme faux positif à son éditeur.
 
 ### UE4SS : version recommandée
 
@@ -127,14 +127,14 @@ The launcher's **"Updates..."** button looks for a new version of the launcher a
 * Existing files are **backed up** (`OutOfMods_backups`); your UE4SS settings and mods are kept; uninstalling removes only what the launcher installed and **restores** what it replaced. Your data (heights, settings) is never touched.
 * Your antivirus may flag `dwmapi.dll`: that is the UE4SS loader (known false positive).
 
-#### Verifying your download & possible false positives (v0.1.0)
+#### Verifying your download & possible false positives (v0.1.1)
 
 SHA-256 fingerprints (PowerShell: `Get-FileHash <file>`):
 
 | File | SHA-256 |
 |---|---|
-| `OutOfMods-0.1.0-win64.zip` | `c67ee13ce59a2e2da72cba4d6d1fb5451b00318b0f5279309fcfa2166c634df0` |
-| `OutOfMods.exe` (inside the zip) | `8db08a43964fbb62deb438f1f0af44d12aa7fc1398fb38ac58e037b2a5eea48b` |
+| `OutOfMods-0.1.1-win64.zip` | `94ffc020f402d84b9dbea5c7148d19378d2fb2e2b20667cf09b8f62b31ce999e` |
+| `OutOfMods.exe` (inside the zip) | `f4bf2c1516d024d3cc3d63b9de67140338b2cd45cf82dd01edb9a568b28c956c` |
 
 The launcher is written in Python and packaged with PyInstaller, **not code-signed** for now. This kind of executable is sometimes wrongly flagged by antivirus products (behavioural detection: it unpacks code in memory). VirusTotal scan of 2026-10-04: `OutOfMods.exe` **3 engines out of 71** (Arctic Wolf, SecureAge, Skyhigh), none of the major antivirus products (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). The full zip: **1 engine out of 67** (Zillya, `Trojan.Blank.Script.2228`, a generic detection of packaged Python scripts). The code is fully open in this repository: you can read it, run the tests and rebuild the exe yourself (`python tools/build_launcher.py`). If in doubt, compare the fingerprint above; if your antivirus blocks the file, you can report it to its vendor as a false positive.
 

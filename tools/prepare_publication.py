@@ -26,7 +26,7 @@ INCLUDE = [
     ("tools/build_package.py", "tools/build_package.py"), ("tools/build_launcher.py", "tools/build_launcher.py"),
     ("tools/make_update_manifest.py", "tools/make_update_manifest.py"), ("tools/check_lua_strings.py", "tools/check_lua_strings.py"),
     ("tools/prepare_publication.py", "tools/prepare_publication.py"),
-    ("tests/test_launcher_core.py", "tests/test_launcher_core.py"), ("tests/test_i18n.py", "tests/test_i18n.py"), ("tests/test_launcher_ui.py", "tests/test_launcher_ui.py"),
+    ("tests/test_launcher_core.py", "tests/test_launcher_core.py"), ("tests/test_i18n.py", "tests/test_i18n.py"), ("tests/test_mod_i18n.py", "tests/test_mod_i18n.py"), ("tests/test_launcher_ui.py", "tests/test_launcher_ui.py"),
     ("tests/test_updates.py", "tests/test_updates.py"), ("tests/test_launcher_updates_ui.py", "tests/test_launcher_updates_ui.py"),
     ("examples", "examples"),
 ]

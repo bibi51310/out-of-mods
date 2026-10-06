@@ -56,7 +56,10 @@ def main():
     for d in (work, os.path.join(out, NAME)):
         shutil.rmtree(d, ignore_errors=True)
     cmd = [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--windowed", "--name", NAME,
-           "--collect-data", "sv_ttk", "--distpath", out, "--workpath", work, "--specpath", work, "--paths", os.path.join(ROOT, "launcher"),
+           "--collect-data", "sv_ttk", "--icon", os.path.join(ROOT, "launcher", "assets", "icon.ico"),
+           "--add-data", os.path.join(ROOT, "launcher", "assets", "icon.ico") + os.pathsep + "assets",
+           "--add-data", os.path.join(ROOT, "launcher", "assets", "logo_256.png") + os.pathsep + "assets",
+           "--add-data", os.path.join(ROOT, "launcher", "assets", "banner_header.png") + os.pathsep + "assets", "--distpath", out, "--workpath", work, "--specpath", work, "--paths", os.path.join(ROOT, "launcher"),
            os.path.join(ROOT, "launcher", "app.pyw")]
     print(" ".join(cmd))
     subprocess.check_call(cmd, cwd=ROOT)

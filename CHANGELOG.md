@@ -2,6 +2,26 @@
 
 Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Dates en AAAA-MM-JJ.
 
+## FlatGround 2 — 0.2.0 (2026-10-06)
+
+Testé sur Out of Ore 0.36.5550 (build Steam 25627989, branche bêta).
+
+### Ajouté
+- **Plancher en pente** : page « Pente » (Départ ici, Piquet A / B, pourcentage ±0,5 / ±1) ; le creusage est limité par le plan incliné.
+- **Piquets 3D** et fil lumineux le long du plan (blanc = remblayer, rouge = creuser, vert = ok à ±10 cm), textes 3D de guidage.
+- **La lame automatique suit la pente** (décalage de coupe de 165 cm pris en compte).
+- **Panneau bilingue FR / EN** (langue du jeu détectée, bouton FR/EN, commande `flat2_lang`).
+- Commandes : `flat2_slope`, `flat2_start`, `flat2_stakes`, `flat2_stake_a`, `flat2_stake_b`.
+
+### Modifié
+- « Départ ici » pose le plan au sol réel, à la position de la lame.
+
+## Out of Mods — 0.1.1 (2026-10-06)
+
+### Modifié
+- Description des mods en anglais quand l'interface est en anglais ; zone de description à hauteur fixe.
+- Icône (fenêtre, barre des tâches, exécutable) et bannière d'en-tête.
+
 ## FlatGround 2 — 0.1.0 (2026-10-04) — première préversion publique
 
 Testé sur Out of Ore 0.36.5550 (build Steam 25627989, branche bêta).

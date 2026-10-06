@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 API_PATH = os.path.join(ROOT, "api", "OutOfOreAPI.lua")
 
 
-def build(mod_name):
+def build(mod_name, dist_dir=None):
     mod_dir = os.path.join(ROOT, "mods", mod_name)
     meta_path = os.path.join(mod_dir, "mod.json")
     main_path = os.path.join(mod_dir, "Scripts", "main.lua")
@@ -50,7 +50,8 @@ def build(mod_name):
         "package.preload[\"OutOfOreAPI\"] = function(...)\n" + api.rstrip() + "\nend\n"
         "-- ===== fin de l'API embarquee =====\n\n"
     )
-    out_dir = os.path.join(ROOT, "dist", mod_name)
+    dist_dir = dist_dir or os.path.join(ROOT, "dist")        # dossier de sortie (les tests en passent un temporaire : ils ne doivent pas ecraser dist/)
+    out_dir = os.path.join(dist_dir, mod_name)
     os.makedirs(os.path.join(out_dir, "Scripts"), exist_ok=True)
     with open(os.path.join(out_dir, "Scripts", "main.lua"), "w", encoding="utf-8", newline="\n") as f:
         f.write(header + embedded + main)
@@ -73,7 +74,7 @@ def build(mod_name):
     with open(os.path.join(out_dir, "README.txt"), "w", encoding="utf-8") as f:
         f.write(readme)
 
-    zip_path = os.path.join(ROOT, "dist", "%s-%s.zip" % (mod_name, version))
+    zip_path = os.path.join(dist_dir, "%s-%s.zip" % (mod_name, version))
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
         for base, _dirs, files in os.walk(out_dir):
             for name in files:

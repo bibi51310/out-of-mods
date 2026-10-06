@@ -1,9 +1,9 @@
 {
   "id": "FlatGround2",
   "name": "FlatGround 2",
-  "version": "0.1.0",
-  "description": "Plancher de creusage (aucun terrassement sous une hauteur Z choisie), panneau en jeu (F7), hauteurs nommees et lame automatique de bulldozer (AutoLevel natif).",
-  "description_en": "Digging floor (no digging below a chosen Z height), in-game panel (F7), named heights and automatic bulldozer blade (native AutoLevel).",
+  "version": "0.2.0",
+  "description": "Plancher de creusage (plat ou en pente, avec piquets 3D), panneau en jeu bilingue (F7), hauteurs nommees et lame automatique de bulldozer (AutoLevel natif).",
+  "description_en": "Digging floor (flat or sloped, with 3D stakes), bilingual in-game panel (F7), named heights and automatic bulldozer blade (native AutoLevel).",
   "author": "Out of Mods",
   "license": "MIT",
   "entry": "Scripts/main.lua",
@@ -38,7 +38,13 @@
     "flat2_off",
     "flat2_status",
     "flat2_scale <0.3-1.5>",
-    "flat2_panel_reset"
+    "flat2_panel_reset",
+    "flat2_lang <fr|en|auto>",
+    "flat2_slope <pourcent>",
+    "flat2_start",
+    "flat2_stakes",
+    "flat2_stake_a",
+    "flat2_stake_b"
   ],
   "dataDirs": [
     "%APPDATA%/OutOfOreFlat2",

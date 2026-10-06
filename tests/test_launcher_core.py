@@ -47,7 +47,7 @@ try:
     check("UE4SS absent signale", not core.find_ue4ss(TMP)["installed"])
 
     # le paquet reel
-    out_dir, zip_path = build_package.build("FlatGround2")
+    out_dir, zip_path = build_package.build("FlatGround2", os.path.join(TMP, "dist"))
     pkg = core.read_package(zip_path)
     check("paquet valide (id, version, fichiers)", pkg["id"] == "FlatGround2" and pkg["meta"]["version"] and len(pkg["files"]) >= 4)
     plan = core.plan_install(pkg, mods_dir)

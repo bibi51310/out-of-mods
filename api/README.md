@@ -156,6 +156,9 @@ API.Vehicle.ReadInteract(v)-- { text, available }  ("to enter vehicle" quand le 
 API.Vehicle.ReadLoad(API.GPS.FindNearest())   -- { fillLevel, fillPercent, digging, dirtLock, bulk }
 API.Vehicle.FindControlled()   -- Actor de l'engin conduit (AVSBaseComponent_C:IsControlled?), ou nil
 API.World.ReadMarkers()    -- liste de { x, y, z, actor, actorClass, controlledByPlayer } : tous les engins + le personnage
+API.World.SpawnShape{ x, y, z, sx, sy, sz, axis = {x,y,z} (direction de l'axe long ; ne pas utiliser pitch/yaw/roll pour ca), material, mesh, collision }  -- forme 3D locale (cylindre de 100 cm par defaut), sans collision
+API.World.DestroyShape(actor)  -- la detruit. Non sauvegardee : disparait au redemarrage. Materiaux existants : MI_Preview_Success (vert),
+                           -- MI_Preview_Fail (rouge), EmissiveMeshMaterial (blanc lumineux) ; pas de couleur libre (voir le commentaire dans le code)
 API.Player.ReadActiveItem()-- { id, amount, index } ; 300001 = Pickaxe (traduire avec DT_GameItems.CustomInfo)
 
 API.Player.ShowMessage("Bonjour")  -- notification native au centre de l'écran (validé sur capture)

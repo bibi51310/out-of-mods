@@ -1058,6 +1058,7 @@ end
 -- Lit le GPS d'un TerraformComponent_C (defaut : GPS.FindNearest()). Renvoie nil si aucun composant ou
 -- si l'appel echoue ; sinon une table dont chaque champ peut etre nil individuellement :
 --   edge     Z du tranchant (cm)              ref      Z du point de reference GPS (cm)
+--   edgeX, edgeY  position horizontale du tranchant (cm)
 --   rot      quaternion {x,y,z,w} du tranchant  zeroRot  quaternion du point de reference
 --   fwd      vitesse d'avancement (cm/s)      component le composant utilise
 --   autoLevelCurrent, autoLevelTarget  Z reel et Z cible du module AutoLevel (autre module que le GPS,
@@ -1078,13 +1079,21 @@ function GPS.Read(terraform)
         return nil
     end
 
+    local function xy(t)
+        local x = t and t.Translation and t.Translation.X
+        local y = t and t.Translation and t.Translation.Y
+        if type(x) == "number" and type(y) == "number" and (x ~= 0 or y ~= 0) then return x, y end
+        return nil, nil
+    end
+    local edgeX, edgeY = xy(tgt)
+
     local rot, zeroRot
     pcall(function() rot = quat(tgt.Rotation) end)
     pcall(function() zeroRot = quat(ref.Rotation) end)
 
     local current, target = GPS.ReadAutoLevelZ(terraform)
 
-    return { edge = z(tgt), ref = z(ref), rot = rot, zeroRot = zeroRot, fwd = fwd, component = terraform,
+    return { edge = z(tgt), edgeX = edgeX, edgeY = edgeY, ref = z(ref), rot = rot, zeroRot = zeroRot, fwd = fwd, component = terraform,
              autoLevelCurrent = current, autoLevelTarget = target }
 end
 
@@ -1203,6 +1212,105 @@ function World.ReadMarkers()
         end
     end
     return list
+end
+
+-- Formes 3D temporaires dans le monde (validees en jeu le 2026-10-04) : un StaticMeshActor local, sans collision, non sauvegarde
+-- (il disparait au redemarrage). opts : mesh (chemin d'un StaticMesh deja charge, defaut le cylindre de base du moteur de 100 cm,
+-- axe Z, centre sur son milieu), x, y, z (centre, cm), pitch/yaw/roll (degres), sx/sy/sz (echelle ; defaut 1), material (chemin
+-- d'un materiau EXISTANT du jeu, facultatif), axis ({ x, y, z } : direction sur laquelle coucher l'axe long du cylindre ; remplace
+-- pitch/yaw/roll), collision (true pour garder les collisions ; defaut non). Renvoie l'Actor, ou nil.
+-- ATTENTION : les rotations d'UE ne se composent pas comme on l'attend (un Yaw ne fait pas tourner l'axe Z d'une forme inclinee) ;
+-- pour orienter une forme sur une direction utiliser `axis` (formule verifiee en jeu : { Pitch = 0, Yaw = cap + 90, Roll = elevation - 90 }).
+-- Materiaux utilisables, vus en jeu : "/RedBuild/Materials/MI_Preview_Success.MI_Preview_Success" (vert),
+-- "/RedBuild/Materials/MI_Preview_Fail.MI_Preview_Fail" (rouge), "/Engine/EngineMaterials/EmissiveMeshMaterial.EmissiveMeshMaterial"
+-- (blanc lumineux). Pas de couleur libre : CreateDynamicMaterialInstance demande un parametre Name (a ne pas appeler).
+function World.SpawnShape(opts)
+    opts = opts or {}
+    local ok, actor = pcall(function()
+        local world = require("UEHelpers").GetWorld()
+        local cls = StaticFindObject("/Script/Engine.StaticMeshActor")
+        local mesh = StaticFindObject(opts.mesh or "/Engine/BasicShapes/Cylinder.Cylinder")
+        if not (world and cls and mesh) then return nil end
+        local pitch, yaw, roll = opts.pitch or 0.0, opts.yaw or 0.0, opts.roll or 0.0
+        if opts.axis then
+            local ax, ay, az = opts.axis.x, opts.axis.y, opts.axis.z
+            local n = math.sqrt(ax * ax + ay * ay + az * az)
+            if n > 1e-6 then
+                pitch = 0.0
+                yaw = math.deg(math.atan(ay, ax)) + 90.0
+                roll = math.deg(math.asin(math.max(-1.0, math.min(1.0, az / n)))) - 90.0
+            end
+        end
+        local a = world:SpawnActor(cls, { X = opts.x or 0, Y = opts.y or 0, Z = opts.z or 0 },
+            { Pitch = pitch, Yaw = yaw, Roll = roll })
+        if not a then return nil end
+        local comp = a.StaticMeshComponent
+        comp:SetMobility(2)                       -- Movable : sinon le moteur refuse de changer le maillage
+        comp:SetStaticMesh(mesh)
+        comp:SetWorldScale3D({ X = opts.sx or 1.0, Y = opts.sy or 1.0, Z = opts.sz or 1.0 })
+        if not opts.collision then comp:SetCollisionEnabled(0) end
+        if opts.material then
+            local mat = StaticFindObject(opts.material)
+            if mat then comp:SetMaterial(0, mat) end
+        end
+        return a
+    end)
+    if ok and actor ~= nil then return actor end
+    return nil
+end
+
+-- Texte 3D dans le monde (TextRenderActor, a tester en jeu) : opts = { text, x, y, z, size (hauteur des lettres, cm ; defaut 25),
+-- yaw (degres, le texte est lisible depuis la direction yaw + 180 ou yaw selon le moteur : voir World.FaceText), color = { r, g, b } (0-255) }.
+-- Renvoie l'Actor ou nil (police ou classe absente). Se detruit avec World.DestroyShape.
+function World.SpawnText(opts)
+    opts = opts or {}
+    local ok, actor = pcall(function()
+        local world = require("UEHelpers").GetWorld()
+        local cls = StaticFindObject("/Script/Engine.TextRenderActor")
+        if not (world and cls) then return nil end
+        local a = world:SpawnActor(cls, { X = opts.x or 0, Y = opts.y or 0, Z = opts.z or 0 }, { Pitch = 0.0, Yaw = opts.yaw or 0.0, Roll = 0.0 })
+        if not a then return nil end
+        local comp = a.TextRender
+        comp:K2_SetText(FText(opts.text or ""))
+        comp:SetWorldSize(opts.size or 25.0)
+        comp:SetHorizontalAlignment(1)       -- centre
+        comp:SetVerticalAlignment(1)         -- centre
+        local c = opts.color or { 255, 255, 255 }
+        comp:SetTextRenderColor({ R = c[1], G = c[2], B = c[3], A = 255 })
+        return a
+    end)
+    if ok and actor ~= nil then return actor end
+    return nil
+end
+
+-- Change le texte d'un texte 3D (World.SpawnText). Renvoie true si l'appel a reussi.
+function World.SetText(actor, text, color)
+    if actor == nil then return false end
+    local ok = pcall(function()
+        local comp = actor.TextRender
+        comp:K2_SetText(FText(text or ""))
+        if color then comp:SetTextRenderColor({ R = color[1], G = color[2], B = color[3], A = 255 }) end
+    end)
+    return ok
+end
+
+-- Change la taille (hauteur des lettres, cm) d'un texte 3D : la faire croitre avec la distance a la camera le garde lisible de loin.
+function World.SetTextSize(actor, size)
+    if actor == nil then return false end
+    return pcall(function() actor.TextRender:SetWorldSize(size) end)
+end
+
+-- Tourne un texte 3D autour de l'axe vertical (yaw en degres) : a appeler quand le joueur bouge pour qu'il reste lisible.
+function World.FaceText(actor, yaw)
+    if actor == nil then return false end
+    return pcall(function() actor:K2_SetActorRotation({ Pitch = 0.0, Yaw = yaw, Roll = 0.0 }, false) end)
+end
+
+-- Detruit une forme creee par SpawnShape. Renvoie true si l'appel a reussi.
+function World.DestroyShape(actor)
+    if actor == nil then return false end
+    local ok = pcall(function() actor:K2_DestroyActor() end)
+    return ok
 end
 
 -- =============================================================================

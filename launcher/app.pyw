@@ -37,8 +37,9 @@ def system_prefers_dark():
 
 
 APP_NAME = "Out of Mods"
-APP_VERSION = "0.1.0"
+APP_VERSION = "0.1.1"
 BASE_DIR = os.path.dirname(sys.executable) if getattr(sys, "frozen", False) else os.path.dirname(os.path.abspath(__file__))
+ASSETS_DIR = os.path.join(getattr(sys, "_MEIPASS", BASE_DIR), "assets")      # logo / icone (embarques dans l'exe par build_launcher.py)
 DATA_DIR = os.path.join(os.environ.get("APPDATA", "."), "OutOfMods")
 SETTINGS = os.path.join(DATA_DIR, "settings.json")
 LOG_FILE = os.path.join(DATA_DIR, "launcher.log")
@@ -112,7 +113,16 @@ class App:
     def __init__(self, root):
         self.root = root
         root.title("%s %s" % (APP_NAME, APP_VERSION))
-        root.geometry("900x840+70+20")
+        try:
+            root.iconbitmap(os.path.join(ASSETS_DIR, "icon.ico"))       # icone de la fenetre (facultative : sans le fichier, icone par defaut)
+        except Exception:
+            pass
+        try:
+            self.icon_img = tk.PhotoImage(file=os.path.join(ASSETS_DIR, "logo_256.png"))    # icone de la barre des taches (reference gardee)
+            root.iconphoto(True, self.icon_img)
+        except Exception:
+            pass
+        root.geometry("900x960+70+10")
         root.minsize(820, 760)
         self.settings = load_settings()
         i18n.set_language(self.settings.get("language") or i18n.detect())
@@ -184,12 +194,21 @@ class App:
         outer = ttk.Frame(self.root, padding=(18, 12, 18, 14))
         outer.pack(fill="both", expand=True)
 
-        # --- en-tete
+        # --- banniere (facultative : sans le fichier, titre texte)
         head = ttk.Frame(outer)
         head.pack(fill="x", pady=(0, 10))
-        ttk.Label(head, text="Out of", font=("Segoe UI Semibold", 20)).pack(side="left")
-        ttk.Label(head, text=" Mods", font=("Segoe UI Semibold", 20), foreground=PALETTE["accent"]).pack(side="left")
-        ttk.Label(head, text="  v%s" % APP_VERSION, foreground=PALETTE["muted"]).pack(side="left", pady=(10, 0))
+        self.banner_img = None
+        try:
+            self.banner_img = tk.PhotoImage(file=os.path.join(ASSETS_DIR, "banner_header.png"))
+        except Exception:
+            self.banner_img = None
+        if self.banner_img:
+            ttk.Label(head, image=self.banner_img).pack(side="left")
+            ttk.Label(head, text="  v%s" % APP_VERSION, foreground=PALETTE["muted"]).pack(side="left", anchor="s", pady=(0, 6))
+        else:
+            ttk.Label(head, text="Out of", font=("Segoe UI Semibold", 20)).pack(side="left")
+            ttk.Label(head, text=" Mods", font=("Segoe UI Semibold", 20), foreground=PALETTE["accent"]).pack(side="left")
+            ttk.Label(head, text="  v%s" % APP_VERSION, foreground=PALETTE["muted"]).pack(side="left", pady=(10, 0))
         self.lang_box = ttk.Combobox(head, values=["Français", "English"], width=9, state="readonly")
         self.lang_box.set("English" if i18n.get_language() == "en" else "Français")
         self.lang_box.bind("<<ComboboxSelected>>", self.change_language)
@@ -253,8 +272,12 @@ class App:
             self.pk_tree.column(c, width=w, anchor="w")
         self.pk_tree.pack(fill="x")
         self.pk_tree.bind("<<TreeviewSelect>>", lambda e: self.show_package())
-        self.lbl_pkg = ttk.Label(pk, text="", justify="left", wraplength=780, foreground=PALETTE["muted"])
-        self.lbl_pkg.pack(anchor="w", pady=(6, 0))
+        # zone de description a hauteur FIXE (3 lignes) : sa taille ne change pas selon le paquet, la carte « Journal » en dessous n'est plus rognee
+        desc_box = ttk.Frame(pk, height=62)
+        desc_box.pack(fill="x", pady=(6, 0))
+        desc_box.pack_propagate(False)
+        self.lbl_pkg = ttk.Label(desc_box, text="", justify="left", wraplength=780, foreground=PALETTE["muted"])
+        self.lbl_pkg.pack(anchor="nw")
         row = ttk.Frame(pk)
         row.pack(fill="x", pady=(8, 0))
         self.btn_install = ttk.Button(row, text=tr("Installer..."), command=self.install_selected, style="Accent.TButton")
@@ -439,7 +462,8 @@ class App:
             return
         m = pkg["meta"]
         warns = core.compat_warnings(m, self.game)
-        text = tr("%s\n%d fichier(s), %d Ko, sha256 %s...\n") % (m.get("description", ""), len(pkg["files"]), pkg["size"] // 1024, pkg["sha256"][:12])
+        desc = (m.get("description_en") if i18n.get_language() == "en" else None) or m.get("description", "")     # langue de l'interface si le paquet la fournit
+        text = tr("%s\n%d fichier(s), %d Ko, sha256 %s...\n") % (desc, len(pkg["files"]), pkg["size"] // 1024, pkg["sha256"][:12])
         if warns:
             text += tr("Attention : ") + "; ".join(warns)
         self.lbl_pkg.config(text=text)
@@ -858,6 +882,11 @@ class App:
 
 
 def main():
+    try:    # sous Windows, un identifiant propre separe la fenetre de python(w).exe : la barre des taches affiche NOTRE icone
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("OutOfMods.Launcher")
+    except Exception:
+        pass
     root = tk.Tk()
     try:
         ttk.Style().theme_use("vista")
