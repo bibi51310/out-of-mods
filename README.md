@@ -30,6 +30,12 @@
   * Décalage de la cible `±1 / ±5` cm ; **marche arrière** : la lame se relève de *N* cm pour décharger la terre ; **Reprise** : le module se coupe sous la résistance du sol, le mod le réarme tout seul.
   * Sécurités : **bulldozer seulement**, plancher actif requis, arrêt en quittant l'engin, **touche J = arrêt d'urgence**.
   * ⚠ Demande le **module AutoLevel monté sur le bulldozer** (branche bêta du jeu). Sans lui, le bouton refuse de s'activer. Le plancher, lui, fonctionne partout.
+* **Plancher en pente et piquets** (onglet **Pente**) : le plancher peut être un plan incliné au lieu d'un plat.
+  * `Départ ici` pose le départ du plan au sol réel, à la position de la lame (ou du personnage) ; `Piquet A` / `Piquet B` définissent la pente en visant deux points du sol (2 m minimum, 40 % maximum) ; ou réglez le pourcentage à la main (`±0,5 / ±1`, `0 %` = plat). Le plan démarre au départ et va vers l'avant (ou s'arrête en B).
+  * **Piquets 3D** tous les 5 m avec un fil lumineux : **blanc** = remblayer, **rouge** = creuser, **vert** = ok (±10 cm), avec la hauteur cible en texte 3D. `Piquets : ON/off` les affiche ou les masque.
+  * Le creusage est limité par le plan et la **lame automatique le suit** en avançant (le décalage entre le point du GPS et l'endroit où la lame coupe est pris en compte).
+  * Commandes : `flat2_slope <pourcent>`, `flat2_start`, `flat2_stakes`, `flat2_stake_a`, `flat2_stake_b`.
+* **Panneau bilingue FR / EN** : langue du jeu détectée, bouton `FR / EN` dans le panneau, commande `flat2_lang fr|en|auto`.
 
 ### Installation
 
@@ -103,6 +109,12 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
   * Target offset `±1 / ±5` cm; **reverse**: the blade lifts *N* cm to dump dirt; **Resume**: the module switches itself off under ground resistance, the mod re-arms it automatically.
   * Safeguards: **bulldozer only**, active floor required, stops when you leave the vehicle, **J key = emergency stop**.
   * ⚠ Requires the **AutoLevel module mounted on the bulldozer** (game's beta branch). Without it the button refuses to start. The floor itself works everywhere.
+* **Sloped floor and stakes** (**Slope** tab): the floor can be an inclined plane instead of a flat one.
+  * `Start here` sets the plane's start at the real ground level, at the blade (or character) position; `Stake A` / `Stake B` define the slope by aiming at two ground points (2 m minimum, 40 % maximum); or set the percentage by hand (`±0.5 / ±1`, `0 %` = flat). The plane starts at the start point and runs forward (or stops at B).
+  * **3D stakes** every 5 m with a glowing line: **white** = fill, **red** = dig, **green** = ok (±10 cm), with the target height as 3D text. `Stakes: ON/off` shows or hides them.
+  * Digging is limited by the plane and the **automatic blade follows it** as you drive (the offset between the GPS point and where the blade actually cuts is taken into account).
+  * Commands: `flat2_slope <percent>`, `flat2_start`, `flat2_stakes`, `flat2_stake_a`, `flat2_stake_b`.
+* **Bilingual FR / EN panel**: game language detected, `FR / EN` button in the panel, `flat2_lang fr|en|auto` command.
 
 ### Installation
 
