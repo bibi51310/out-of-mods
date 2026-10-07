@@ -41,7 +41,7 @@
 ### Fonctions de Pay Dirt
 
 * **Prix de vente x2** (facteur réglable) pour les **ressources et les minerais** : minerais, roches, terre, asphalte, fluides, métaux affinés (fer, cuivre, or, rubis, platine, silicium, lithium, acier…). Le **prix affiché** dans le magasin et l'**argent reçu** sont identiques, que vous vendiez depuis l'inventaire ou au magasin.
-* **Ni les achats, ni les quêtes, ni la bourse ne changent.** Les engins, bâtiments, pièces, équipements et matériaux qui s'achètent (bois, caoutchouc, plastique, électronique…) ne sont **pas** doublés : tout se revend à environ 70 % de sa valeur, doublé ça dépasserait le prix d'achat (boucle achat / revente).
+* **Ni les achats ni les quêtes ne changent.** Les engins, bâtiments, pièces, équipements et matériaux qui s'achètent (bois, caoutchouc, plastique, électronique…) ne sont **pas** doublés : tout se revend à environ 70 % de sa valeur, doublé ça dépasserait le prix d'achat (boucle achat / revente).
 * **Aucune sauvegarde modifiée** : le mod se charge sur une partie existante ; le retirer rend l'économie normale. Rien n'est écrit dans les règles de la partie.
 * Console (`~` ou F10) : `boost <facteur>` (`boost 1` = normal, `boost 3` = x3), `boost_status`, `boost_scope ore|all` (⚠ `all` double aussi engins et bâtiments : risque de boucle achat / revente), `boost_mode price|bonus` (repli), `boost_log 0|1` (diagnostic).
 * Le nom vient du « pay dirt », le minerai à laver du jeu.
@@ -94,7 +94,7 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
 
 * Testé sur **un seul build** du jeu ; une mise à jour peut casser un mod (le launcheur affiche un avertissement si le build diffère).
 * Le plancher fonctionne en solo ; le multijoueur n'a pas été testé.
-* **Pay Dirt** : testé aux **magasins de ville** et à la vente depuis l'inventaire ; les autres points de vente de minerai, la bourse et le multijoueur n'ont pas été testés. La liste des objets doublés correspond au build 25627989 : un minerai ajouté plus tard ne sera doublé qu'après mise à jour du mod.
+* **Pay Dirt** : testé à la vente **depuis l'inventaire** et aux **magasins de ville** ; le multijoueur n'a pas été testé. La liste des objets doublés correspond au build 25627989 : un minerai ajouté plus tard ne sera doublé qu'après mise à jour du mod.
 * Panneau vérifié en 1080p et 720p (formule d'adaptation valable pour les autres résolutions).
 
 ---
@@ -131,7 +131,7 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
 ### Pay Dirt features
 
 * **Sale prices x2** (adjustable factor) for **resources and ores**: ores, rock, dirt, asphalt, fluids, refined metals (iron, copper, gold, ruby, platinum, silicon, lithium, steel…). The **price shown** in the store and the **money received** are identical, whether you sell from the inventory or at the store.
-* **Purchases, quests and the stock market are unchanged.** Vehicles, buildings, parts, equipment and materials you can buy (wood, rubber, plastics, electronics…) are **not** doubled: everything resells at about 70 % of its value, so doubling would exceed the purchase price (buy / resell loop).
+* **Purchases and quests are unchanged.** Vehicles, buildings, parts, equipment and materials you can buy (wood, rubber, plastics, electronics…) are **not** doubled: everything resells at about 70 % of its value, so doubling would exceed the purchase price (buy / resell loop).
 * **Saves untouched**: the mod loads on an existing game; removing it restores the normal economy. Nothing is written to the game rules.
 * Console (`~` or F10): `boost <factor>` (`boost 1` = normal, `boost 3` = x3), `boost_status`, `boost_scope ore|all` (⚠ `all` also doubles vehicles and buildings: buy / resell loop risk), `boost_mode price|bonus` (fallback), `boost_log 0|1` (diagnostics).
 * The name comes from "pay dirt", the game's ore-bearing dirt you wash.
@@ -186,7 +186,7 @@ Please include: game version (shown in the menu, e.g. `v0.36.5550`), mod / launc
 
 * Tested on **a single game build**; an update may break a mod (the launcher warns when the build differs).
 * The floor works in single player; multiplayer has not been tested.
-* **Pay Dirt**: tested at **town stores** and when selling from the inventory; other ore selling points, the stock market and multiplayer have not been tested. The list of doubled items matches build 25627989: an ore added later is only doubled after a mod update.
+* **Pay Dirt**: tested when selling **from the inventory** and at **town stores**; multiplayer has not been tested. The list of doubled items matches build 25627989: an ore added later is only doubled after a mod update.
 * Panel verified at 1080p and 720p (the adaptation formula applies to other resolutions).
 
 ---
