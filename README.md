@@ -2,7 +2,7 @@
 
 🇫🇷 [Français](#français) · 🇬🇧 [English](#english)
 
-**Nexus Mods :** [Out of Mods (launcher)](https://www.nexusmods.com/outofore/mods/6) · [FlatGround 2 (mod)](https://www.nexusmods.com/outofore/mods/7) — ou / or [GitHub Releases](https://github.com/bibi51310/out-of-mods/releases) · **Discord :** https://discord.gg/CkP5c8cpz4
+**Nexus Mods :** [Out of Mods (launcher)](https://www.nexusmods.com/outofore/mods/6) · [FlatGround 2 (mod)](https://www.nexusmods.com/outofore/mods/7) · [Pay Dirt (mod)](https://www.nexusmods.com/outofore/mods/8) — ou / or [GitHub Releases](https://github.com/bibi51310/out-of-mods/releases) · **Discord :** https://discord.gg/CkP5c8cpz4
 
 > **Statut / Status** : version 0.2.0 (FlatGround 2) / 0.1.0 (Pay Dirt) / 0.1.1 (launcheur) (préversion / preview). Testé sur / tested on **Out of Ore 0.36.5550, build Steam 25627989, branche bêta**.
 > Licence / License : **MIT** — © 2026 Out of Mods (voir / see `LICENSE`, `THIRD_PARTY_NOTICES.md`).
