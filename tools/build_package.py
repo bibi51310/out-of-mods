@@ -60,17 +60,21 @@ def build(mod_name, dist_dir=None):
     with open(os.path.join(out_dir, "mod.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
         f.write("\n")
-    readme = (
+    rd = meta.get("readme", {})            # textes propres au mod (sinon : texte historique de FlatGround2)
+    usage = rd.get("usage", "Lancer le jeu. F7 ouvre le panneau, F8 le ferme.")
+    note = rd.get("note", "La lame automatique demande le module AutoLevel monte sur le bulldozer.")
+    readme_fmt = (
         "%s v%s\n%s\n\n"
         "INSTALLATION\n"
         "  1. Installer UE4SS (kit communautaire Out of Ore) si ce n'est pas deja fait.\n"
         "  2. Copier le dossier \"%s\" dans  <Jeu>/OutOfOre/Binaries/Win64/UE4SS/Mods/\n"
         "     (le fichier enabled.txt suffit a l'activer ; sinon ajouter la ligne  %s : 1  dans mods.txt).\n"
-        "  3. Lancer le jeu. F7 ouvre le panneau, F8 le ferme.\n\n"
-        "Jeu teste : %s (build Steam %s, branche %s). La lame automatique demande le module AutoLevel monte sur le bulldozer.\n"
-        % (meta["name"], version, meta.get("description", ""), mod_name, mod_name, meta["game"].get("testedGameVersion", "?"),
-           meta["game"].get("testedBuildId", "?"), meta["game"].get("branch", "?"))
+        "  3. " + usage.replace("%", "%%") + "\n\n"
+        "Jeu teste : %s (build Steam %s, branche %s). " + note.replace("%", "%%") + "\n"
     )
+    readme = readme_fmt % (meta["name"], version, meta.get("description", ""), mod_name, mod_name,
+                           meta["game"].get("testedGameVersion", "?"), meta["game"].get("testedBuildId", "?"),
+                           meta["game"].get("branch", "?"))
     with open(os.path.join(out_dir, "README.txt"), "w", encoding="utf-8") as f:
         f.write(readme)
 

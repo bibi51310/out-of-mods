@@ -20,7 +20,7 @@ INCLUDE = [
     ("LICENSE", "LICENSE"), ("THIRD_PARTY_NOTICES.md", "THIRD_PARTY_NOTICES.md"),
     ("publish/README.md", "README.md"), ("publish/CHANGELOG.md", "CHANGELOG.md"),
     ("publish/CONTRIBUTING.md", "CONTRIBUTING.md"), ("publish/MODDING.md", "MODDING.md"), ("publish/github", ".github"),
-    ("mods/FlatGround2", "mods/FlatGround2"),
+    ("mods/FlatGround2", "mods/FlatGround2"), ("mods/PayDirt", "mods/PayDirt"),
     ("api/OutOfOreAPI.lua", "api/OutOfOreAPI.lua"), ("api/README.md", "api/README.md"),
     ("launcher", "launcher"),
     ("tools/build_package.py", "tools/build_package.py"), ("tools/build_launcher.py", "tools/build_launcher.py"),

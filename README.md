@@ -1,10 +1,10 @@
-# Out of Mods — launcher & FlatGround 2 for *Out of Ore*
+# Out of Mods — launcher, FlatGround 2 & Pay Dirt for *Out of Ore*
 
 🇫🇷 [Français](#français) · 🇬🇧 [English](#english)
 
 **Nexus Mods :** [Out of Mods (launcher)](https://www.nexusmods.com/outofore/mods/6) · [FlatGround 2 (mod)](https://www.nexusmods.com/outofore/mods/7) — ou / or [GitHub Releases](https://github.com/bibi51310/out-of-mods/releases) · **Discord :** https://discord.gg/CkP5c8cpz4
 
-> **Statut / Status** : version 0.2.0 (FlatGround 2) / 0.1.1 (launcheur) (préversion / preview). Testé sur / tested on **Out of Ore 0.36.5550, build Steam 25627989, branche bêta**.
+> **Statut / Status** : version 0.2.0 (FlatGround 2) / 0.1.0 (Pay Dirt) / 0.1.1 (launcheur) (préversion / preview). Testé sur / tested on **Out of Ore 0.36.5550, build Steam 25627989, branche bêta**.
 > Licence / License : **MIT** — © 2026 Out of Mods (voir / see `LICENSE`, `THIRD_PARTY_NOTICES.md`).
 
 ---
@@ -16,6 +16,7 @@
 | Élément | Rôle |
 |---|---|
 | **FlatGround 2** (mod) | Un **plancher de creusage** : aucun terrassement sous la hauteur Z choisie → des terrains parfaitement plats. Panneau en jeu, hauteurs nommées, **lame automatique de bulldozer** qui tient le plancher. |
+| **Pay Dirt** (mod) | **Ventes x2** : le prix de vente des **ressources et minerais** est doublé, affiché et reçu. Aucune sauvegarde modifiée. |
 | **Out of Mods** (le launcheur, programme Windows) | Détecte le jeu, installe / désinstalle / active les mods et, **si vous le demandez**, installe UE4SS. **Rien n'est fait sans votre confirmation.** |
 | **OutOfOreAPI** (pour les moddeurs) | Bibliothèque Lua : lecture du monde, des engins, de l'économie, fenêtres en jeu… voir `api/README.md`. **Publier votre propre mod : [MODDING.md](MODDING.md).** |
 
@@ -37,15 +38,23 @@
   * Commandes : `flat2_slope <pourcent>`, `flat2_start`, `flat2_stakes`, `flat2_stake_a`, `flat2_stake_b`.
 * **Panneau bilingue FR / EN** : langue du jeu détectée, bouton `FR / EN` dans le panneau, commande `flat2_lang fr|en|auto`.
 
+### Fonctions de Pay Dirt
+
+* **Prix de vente x2** (facteur réglable) pour les **ressources et les minerais** : minerais, roches, terre, asphalte, fluides, métaux affinés (fer, cuivre, or, rubis, platine, silicium, lithium, acier…). Le **prix affiché** dans le magasin et l'**argent reçu** sont identiques, que vous vendiez depuis l'inventaire ou au magasin.
+* **Ni les achats, ni les quêtes, ni la bourse ne changent.** Les engins, bâtiments, pièces, équipements et matériaux qui s'achètent (bois, caoutchouc, plastique, électronique…) ne sont **pas** doublés : tout se revend à environ 70 % de sa valeur, doublé ça dépasserait le prix d'achat (boucle achat / revente).
+* **Aucune sauvegarde modifiée** : le mod se charge sur une partie existante ; le retirer rend l'économie normale. Rien n'est écrit dans les règles de la partie.
+* Console (`~` ou F10) : `boost <facteur>` (`boost 1` = normal, `boost 3` = x3), `boost_status`, `boost_scope ore|all` (⚠ `all` double aussi engins et bâtiments : risque de boucle achat / revente), `boost_mode price|bonus` (repli), `boost_log 0|1` (diagnostic).
+* Le nom vient du « pay dirt », le minerai à laver du jeu.
+
 ### Installation
 
 **Avec le launcheur (recommandé)** — lancez `OutOfMods.exe` (interface en français ou en anglais, selon Windows ; sélecteur en haut à droite) :
 
 1. Il détecte votre jeu Steam. Si UE4SS manque, il propose **« Installer UE4SS (téléchargement)… »** : vous voyez d'où ça vient, la liste exacte des fichiers, et vous confirmez.
-2. Sélectionnez **FlatGround 2** dans « Paquets disponibles » → **Installer…** → lisez le détail → confirmez.
+2. Sélectionnez **FlatGround 2** dans « Paquets disponibles » → **Installer…** → lisez le détail → confirmez. Pour **Pay Dirt** : téléchargez `PayDirt-0.1.0.zip` puis **« Ouvrir un paquet (.zip)… »** → lisez le détail → confirmez.
 3. Lancez le jeu. **F7** ouvre le panneau.
 
-**À la main** : installez UE4SS (voir ci-dessous), copiez le dossier `FlatGround2` du zip dans `…/OutOfOre/Binaries/Win64/ue4ss/Mods/` (le fichier `enabled.txt` suffit à l'activer).
+**À la main** : installez UE4SS (voir ci-dessous), copiez le dossier `FlatGround2` (ou `PayDirt`) du zip dans `…/OutOfOre/Binaries/Win64/ue4ss/Mods/` (le fichier `enabled.txt` suffit à l'activer).
 
 ### Mises à jour
 
@@ -67,6 +76,7 @@ Empreintes SHA-256 (PowerShell : `Get-FileHash <fichier>`) :
 | Fichier | SHA-256 |
 |---|---|
 | `OutOfMods-0.1.1-win64.zip` | `94ffc020f402d84b9dbea5c7148d19378d2fb2e2b20667cf09b8f62b31ce999e` |
+| `PayDirt-0.1.0.zip` | `3fa4b09311e720b29137a5ad2014b9b4ed9ee0f5fa05b6a619c3f28df31dc146` |
 | `OutOfMods.exe` (dans le zip) | `f4bf2c1516d024d3cc3d63b9de67140338b2cd45cf82dd01edb9a568b28c956c` |
 
 Le launcheur est écrit en Python et empaqueté avec PyInstaller, **sans signature de code** pour l'instant. Ce type d'exécutable est parfois signalé à tort par des antivirus (détection par comportement : il décompresse du code en mémoire). Analyse VirusTotal de la 0.1.0 (2026-10-04, la 0.1.1 n'a pas encore été analysée) : `OutOfMods.exe` **3 moteurs sur 71** (Arctic Wolf, SecureAge, Skyhigh), aucun des principaux antivirus (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). Le zip complet : **1 moteur sur 67** (Zillya, `Trojan.Blank.Script.2228`, détection générique de script Python empaqueté). Le code est entièrement ouvert dans ce dépôt, vous pouvez le lire, lancer les tests et reconstruire l'exe vous-même (`python tools/build_launcher.py`). En cas de doute, comparez l'empreinte ci-dessus ; si votre antivirus bloque le fichier, vous pouvez le signaler comme faux positif à son éditeur.
@@ -84,6 +94,7 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
 
 * Testé sur **un seul build** du jeu ; une mise à jour peut casser un mod (le launcheur affiche un avertissement si le build diffère).
 * Le plancher fonctionne en solo ; le multijoueur n'a pas été testé.
+* **Pay Dirt** : testé aux **magasins de ville** et à la vente depuis l'inventaire ; les autres points de vente de minerai, la bourse et le multijoueur n'ont pas été testés. La liste des objets doublés correspond au build 25627989 : un minerai ajouté plus tard ne sera doublé qu'après mise à jour du mod.
 * Panneau vérifié en 1080p et 720p (formule d'adaptation valable pour les autres résolutions).
 
 ---
@@ -95,6 +106,7 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
 | Item | What it does |
 |---|---|
 | **FlatGround 2** (mod) | A **digging floor**: nothing can be dug below your chosen Z height → perfectly flat ground. In-game panel, named heights and an **automatic bulldozer blade** that holds the floor. |
+| **Pay Dirt** (mod) | **Sales x2**: the sale price of **resources and ores** is doubled, shown and received. Saves untouched. |
 | **Out of Mods** (the launcher, Windows app) | Detects the game, installs / uninstalls / enables mods and, **only if you ask**, installs UE4SS. **Nothing happens without your confirmation.** |
 | **OutOfOreAPI** (for modders) | Lua library: world, vehicles, economy, in-game windows… see `api/README.md`. **Publishing your own mod: [MODDING.md](MODDING.md).** |
 
@@ -116,6 +128,14 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
   * Commands: `flat2_slope <percent>`, `flat2_start`, `flat2_stakes`, `flat2_stake_a`, `flat2_stake_b`.
 * **Bilingual FR / EN panel**: game language detected, `FR / EN` button in the panel, `flat2_lang fr|en|auto` command.
 
+### Pay Dirt features
+
+* **Sale prices x2** (adjustable factor) for **resources and ores**: ores, rock, dirt, asphalt, fluids, refined metals (iron, copper, gold, ruby, platinum, silicon, lithium, steel…). The **price shown** in the store and the **money received** are identical, whether you sell from the inventory or at the store.
+* **Purchases, quests and the stock market are unchanged.** Vehicles, buildings, parts, equipment and materials you can buy (wood, rubber, plastics, electronics…) are **not** doubled: everything resells at about 70 % of its value, so doubling would exceed the purchase price (buy / resell loop).
+* **Saves untouched**: the mod loads on an existing game; removing it restores the normal economy. Nothing is written to the game rules.
+* Console (`~` or F10): `boost <factor>` (`boost 1` = normal, `boost 3` = x3), `boost_status`, `boost_scope ore|all` (⚠ `all` also doubles vehicles and buildings: buy / resell loop risk), `boost_mode price|bonus` (fallback), `boost_log 0|1` (diagnostics).
+* The name comes from "pay dirt", the game's ore-bearing dirt you wash.
+
 ### Installation
 
 **With the launcher (recommended)** — run `OutOfMods.exe` (French or English interface depending on Windows; selector at the top right):
@@ -124,7 +144,9 @@ Précisez : version du jeu (le menu l'affiche, ex. `v0.36.5550`), mod / launcheu
 2. Select **FlatGround 2** under "Available packages" → **Install…** → read the details → confirm.
 3. Start the game. **F7** opens the panel.
 
-**Manually**: install UE4SS (see below), copy the `FlatGround2` folder from the zip into `…/OutOfOre/Binaries/Win64/ue4ss/Mods/` (the `enabled.txt` file is enough to enable it).
+For **Pay Dirt**: download `PayDirt-0.1.0.zip`, then **"Open a package (.zip)…"** → read the details → confirm.
+
+**Manually**: install UE4SS (see below), copy the `FlatGround2` (or `PayDirt`) folder from the zip into `…/OutOfOre/Binaries/Win64/ue4ss/Mods/` (the `enabled.txt` file is enough to enable it).
 
 ### Updates
 
@@ -146,6 +168,7 @@ SHA-256 fingerprints (PowerShell: `Get-FileHash <file>`):
 | File | SHA-256 |
 |---|---|
 | `OutOfMods-0.1.1-win64.zip` | `94ffc020f402d84b9dbea5c7148d19378d2fb2e2b20667cf09b8f62b31ce999e` |
+| `PayDirt-0.1.0.zip` | `3fa4b09311e720b29137a5ad2014b9b4ed9ee0f5fa05b6a619c3f28df31dc146` |
 | `OutOfMods.exe` (inside the zip) | `f4bf2c1516d024d3cc3d63b9de67140338b2cd45cf82dd01edb9a568b28c956c` |
 
 The launcher is written in Python and packaged with PyInstaller, **not code-signed** for now. This kind of executable is sometimes wrongly flagged by antivirus products (behavioural detection: it unpacks code in memory). VirusTotal scan of 2026-10-04: `OutOfMods.exe` **3 engines out of 71** (Arctic Wolf, SecureAge, Skyhigh), none of the major antivirus products (Avast, AVG, Avira, BitDefender, ClamAV, CrowdStrike...). The full zip: **1 engine out of 67** (Zillya, `Trojan.Blank.Script.2228`, a generic detection of packaged Python scripts). The code is fully open in this repository: you can read it, run the tests and rebuild the exe yourself (`python tools/build_launcher.py`). If in doubt, compare the fingerprint above; if your antivirus blocks the file, you can report it to its vendor as a false positive.
@@ -163,6 +186,7 @@ Please include: game version (shown in the menu, e.g. `v0.36.5550`), mod / launc
 
 * Tested on **a single game build**; an update may break a mod (the launcher warns when the build differs).
 * The floor works in single player; multiplayer has not been tested.
+* **Pay Dirt**: tested at **town stores** and when selling from the inventory; other ore selling points, the stock market and multiplayer have not been tested. The list of doubled items matches build 25627989: an ore added later is only doubled after a mod update.
 * Panel verified at 1080p and 720p (the adaptation formula applies to other resolutions).
 
 ---

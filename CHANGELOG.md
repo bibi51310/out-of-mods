@@ -2,6 +2,15 @@
 
 Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Dates en AAAA-MM-JJ.
 
+## Pay Dirt — 0.1.0 (2026-10-07) — première préversion publique
+
+Testé sur Out of Ore 0.36.5550 (build Steam 25627989, branche bêta).
+
+### Ajouté
+- **Prix de vente x2** (facteur réglable) pour les ressources et les minerais, **prix affiché et argent reçu** identiques. Achats, quêtes et bourse inchangés ; engins, bâtiments, pièces et équipements non doublés (pas de boucle achat / revente).
+- Commandes : `boost <facteur>`, `boost_status`, `boost_scope ore|all`, `boost_mode price|bonus`, `boost_log 0|1`.
+- Aucune sauvegarde modifiée : le mod se charge sur une partie existante et se retire sans trace.
+
 ## FlatGround 2 — 0.2.0 (2026-10-06)
 
 Testé sur Out of Ore 0.36.5550 (build Steam 25627989, branche bêta).

@@ -1,0 +1,31 @@
+{
+  "id": "PayDirt",
+  "name": "Pay Dirt",
+  "version": "0.1.0",
+  "description": "Prix de vente x2 pour les ressources et minerais (affiche et recu), sans modifier la sauvegarde.",
+  "description_en": "Sale prices x2 for resources and ores (shown and received), without modifying the save.",
+  "author": "Out of Mods",
+  "license": "MIT",
+  "entry": "Scripts/main.lua",
+  "ue4ss": {
+    "minVersion": "3.0.1"
+  },
+  "game": {
+    "name": "Out of Ore",
+    "steamAppId": 2009350,
+    "testedBuildId": "25627989",
+    "testedGameVersion": "0.36.5550",
+    "branch": "beta"
+  },
+  "console": [
+    "boost <facteur>",
+    "boost_status",
+    "boost_mode price|bonus",
+    "boost_all 0|1",
+    "boost_log 0|1"
+  ],
+  "readme": {
+    "usage": "Lancer le jeu. Les ventes de ressources et de minerais sont doublees (prix affiche et argent recu) ; achats, quetes, engins et batiments inchanges. Console (~ ou F10) : boost <facteur> (boost 1 = normal), boost_status.",
+    "note": "Aucune sauvegarde n'est modifiee : retirer le dossier suffit a revenir a l'economie normale."
+  }
+}
